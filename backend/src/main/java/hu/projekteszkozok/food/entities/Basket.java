@@ -23,8 +23,6 @@ public class Basket {
     private User user;
 
     @OneToMany
-    private List<Burger> burger;
+    private List<Food> food;
 
-    @OneToMany
-    private List<Pizza> pizza;
 }

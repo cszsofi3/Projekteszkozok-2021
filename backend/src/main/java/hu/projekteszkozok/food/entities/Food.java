@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-public class Burger {
+public class Food {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +22,9 @@ public class Burger {
     @Column
     private String name;
 
-    @OneToMany (mappedBy = "burger")
-    private List<BurgerIngredient> burgerIngredientList;
+    @Column
+    private String type;
+
+    @OneToMany (mappedBy = "food")
+    private List<Ingredient> ingredientList;
 }

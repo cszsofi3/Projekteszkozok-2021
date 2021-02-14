@@ -13,7 +13,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-public class PizzaIngredient {
+public class Ingredient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +24,6 @@ public class PizzaIngredient {
 
     @JsonIgnore
     @ManyToOne
-    private Pizza pizza;
+    private Food food;
 
 }
