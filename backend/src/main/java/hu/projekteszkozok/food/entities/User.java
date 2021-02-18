@@ -18,4 +18,7 @@ public class User {
 
     @Column
     private String name;
+
+//    @OneToMany
+//    private List<Food> foods;
 }

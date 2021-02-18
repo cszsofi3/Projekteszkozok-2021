@@ -1,5 +1,6 @@
 package hu.projekteszkozok.food.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -25,6 +26,11 @@ public class Food {
     @Column
     private String type;
 
-    @OneToMany (mappedBy = "food")
+    @OneToMany(mappedBy = "food")
     private List<Ingredient> ingredientList;
+
+//    @ManyToOne
+//    @JsonIgnore
+//    @JoinColumn(name="userId", nullable = false)
+//    private User user;
 }
