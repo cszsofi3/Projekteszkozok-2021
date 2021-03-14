@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -19,6 +20,18 @@ public class User {
     @Column
     private String name;
 
-//    @OneToMany
-//    private List<Food> foods;
+//    @Column(nullable = false)
+//    @JsonProperty(access = WRITE_ONLY)
+//    private String email;
+//
+//    @Column(nullable = false)
+//    @JsonProperty(access = WRITE_ONLY)
+//    private String password;
+
+//    @Column(nullable = false)
+//    @Enumerated(EnumType.STRING)
+//    private Role role;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Food> basket;
 }

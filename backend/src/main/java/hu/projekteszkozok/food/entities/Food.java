@@ -1,6 +1,5 @@
 package hu.projekteszkozok.food.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -24,13 +23,9 @@ public class Food {
     private String name;
 
     @Column
-    private String type;
+    @Enumerated(EnumType.STRING)
+    private Type type;
 
-    @OneToMany(mappedBy = "food")
-    private List<Ingredient> ingredientList;
-
-//    @ManyToOne
-//    @JsonIgnore
-//    @JoinColumn(name="userId", nullable = false)
-//    private User user;
+    @OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+    private List<Ingredient> ingredient;
 }
