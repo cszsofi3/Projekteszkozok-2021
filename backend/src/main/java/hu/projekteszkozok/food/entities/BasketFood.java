@@ -1,23 +1,26 @@
 package hu.projekteszkozok.food.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-public class Ingredient {
+@Builder
+public class BasketFood {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @ManyToOne
+    @JsonIgnore
+    private User owner;
 
     @Column
     private String name;
@@ -25,7 +28,6 @@ public class Ingredient {
     @Column
     private Integer price;
 
-    @JsonIgnore
-    @ManyToOne
-    private Food food;
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Ingredient> extraIngredient;
 }

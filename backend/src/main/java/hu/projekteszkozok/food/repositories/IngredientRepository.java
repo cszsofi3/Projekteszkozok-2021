@@ -8,4 +8,6 @@ import java.util.List;
 public interface IngredientRepository  extends CrudRepository<Ingredient, Integer> {
 
     List<Ingredient> findAll();
+
+    Ingredient findIngredientById(Integer id);
 }

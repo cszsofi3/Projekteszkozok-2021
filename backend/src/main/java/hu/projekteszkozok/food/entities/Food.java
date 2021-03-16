@@ -26,6 +26,9 @@ public class Food {
     @Enumerated(EnumType.STRING)
     private Type type;
 
+    @Column
+    private Integer price;
+
     @OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
     private List<Ingredient> ingredient;
 }
