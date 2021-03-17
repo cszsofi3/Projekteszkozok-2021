@@ -34,6 +34,9 @@ public class User {
 //    @Enumerated(EnumType.STRING)
 //    private Role role;
 
+    @Column
+    private Integer basketPrice;
+
     @OneToMany(fetch = FetchType.LAZY)
-    private List<Food> basket;
+    private List<BasketFood> basket;
 }

@@ -1,7 +1,9 @@
 package hu.projekteszkozok.food.services;
 
+import hu.projekteszkozok.food.entities.BasketFood;
 import hu.projekteszkozok.food.entities.Food;
 import hu.projekteszkozok.food.entities.User;
+import hu.projekteszkozok.food.repositories.BasketFoodRepository;
 import hu.projekteszkozok.food.repositories.FoodRepository;
 import hu.projekteszkozok.food.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,10 @@ public class UserService {
     private UserRepository userRepository;
     @Autowired
     private FoodRepository foodRepository;
+    @Autowired
+    private BasketFoodRepository basketFoodRepository;
+//    @Autowired
+//    private IngredientRepository ingredientRepository;
 
     public String deleteUser(Integer id) {
         User currentUser = userRepository.findUserById(id);
@@ -25,27 +31,75 @@ public class UserService {
 
         return currentUser.getName() + " deleted";
     }
+
     public User addFoodToBasket(Integer id, Integer userId) {
         Food currentFood = foodRepository.findFoodById(id);
         User currentUser = userRepository.findUserById(userId);
-        List<Food> foods = currentUser.getBasket();
+        Integer currentPrice = currentUser.getBasketPrice();
+        List<BasketFood> foods = currentUser.getBasket();
 
-        foods.add(currentFood);
+        BasketFood currentBasketFood = BasketFood.builder()
+                .owner(currentUser)
+                .name(currentFood.getName())
+                .price(currentFood.getPrice())
+                .build();
+
+        foods.add(currentBasketFood);
         currentUser.setBasket(foods);
+        currentPrice += currentBasketFood.getPrice();
+        currentUser.setBasketPrice(currentPrice);
+        basketFoodRepository.save(currentBasketFood);
 
         return userRepository.save(currentUser);
     }
 
-        public String deleteFoodFromBasket(Integer id, Integer userId) {
-        Food currentFood = foodRepository.findFoodById(id);
+//    public User addExtraIngredient(Integer id, Integer ingredientId) {
+//        BasketFood currentBasketFood = basketFoodRepository.findBasketFoodById(id);
+//        User currentUser = currentBasketFood.getOwner();
+//        Ingredient currentIngredient = ingredientRepository.findIngredientById(ingredientId);
+//        List<Ingredient> extraIngredients = currentBasketFood.getExtraIngredient();
+//        Integer currentPrice = currentUser.getBasketPrice();
+//
+//        extraIngredients.add(currentIngredient);
+//        currentPrice += currentIngredient.getPrice();
+//        currentUser.setBasketPrice(currentPrice);
+//        currentBasketFood.setExtraIngredient(extraIngredients);
+//        basketFoodRepository.save(currentBasketFood);
+//
+//        return userRepository.save(currentUser);
+//    }
+//
+//    public String deleteExtraIngredient(Integer id, Integer ingredientId) {
+//        BasketFood currentBasketFood = basketFoodRepository.findBasketFoodById(id);
+//        User currentUser = currentBasketFood.getOwner();
+//        Ingredient currentIngredient = ingredientRepository.findIngredientById(ingredientId);
+//        List<Ingredient> extraIngredients = currentBasketFood.getExtraIngredient();
+//        Integer currentPrice = currentUser.getBasketPrice();
+//
+//        extraIngredients.remove(currentIngredient);
+//        currentPrice -= currentIngredient.getPrice();
+//        currentUser.setBasketPrice(currentPrice);
+//        currentBasketFood.setExtraIngredient(extraIngredients);
+//        basketFoodRepository.save(currentBasketFood);
+//        userRepository.save(currentUser);
+//
+//        return "deleted";
+//    }
+
+    public String deleteFoodFromBasket(Integer id, Integer userId) {
+        BasketFood currentBasketFood = basketFoodRepository.findBasketFoodById(id);
         User currentUser = userRepository.findUserById(userId);
-        List<Food> foods = currentUser.getBasket();
+        Integer currentPrice = currentUser.getBasketPrice();
+        List<BasketFood> foods = currentUser.getBasket();
 
-        foods.remove(currentFood);
+
+        foods.remove(currentBasketFood);
         currentUser.setBasket(foods);
+        currentPrice -= currentBasketFood.getPrice();
+        currentUser.setBasketPrice(currentPrice);
         userRepository.save(currentUser);
+        basketFoodRepository.delete(currentBasketFood);
 
-        return currentFood.getName() + " deleted";
+        return currentBasketFood.getName() + " deleted";
     }
-
 }
