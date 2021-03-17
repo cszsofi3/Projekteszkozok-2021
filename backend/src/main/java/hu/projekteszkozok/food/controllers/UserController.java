@@ -22,6 +22,7 @@ public class UserController {
 
     @PostMapping("/add")
     public User addUser(@RequestBody User user) {
+        user.setBasketPrice(0);
         return userRepository.save(user);
     }
 
@@ -39,4 +40,14 @@ public class UserController {
     public String deleteFoodFromBasket(@PathVariable Integer id, @PathVariable  Integer userId) {
         return userService.deleteFoodFromBasket(id, userId);
     }
+
+//    @PostMapping("/{id}/extra/{ingredientId}")
+//    public User addExtraIngredient(Integer id, Integer ingredientId) {
+//        return userService.addExtraIngredient(id, ingredientId);
+//    }
+//    @PostMapping("/{id}/deleteExtra/{ingredientId}")
+//    public String deleteExtraIngredient(Integer id, Integer ingredientId) {
+//        return userService.deleteExtraIngredient(id, ingredientId);
+//    }
+
 }
