@@ -2,7 +2,7 @@
   <v-app id="inspire">
       <v-card>
           <v-card-text>
-              <p>Welocme</p>
+              <p>Welcome</p>
           </v-card-text>
       </v-card>
   </v-app>
