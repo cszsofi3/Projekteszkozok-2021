@@ -11,6 +11,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name="users")
 public class User {
 
     @Id
@@ -19,6 +20,7 @@ public class User {
 
     @Column
     private String name;
+    private String password;
 
 //    @Column(nullable = false)
 //    @JsonProperty(access = WRITE_ONLY)
