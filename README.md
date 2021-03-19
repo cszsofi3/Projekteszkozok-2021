@@ -4,7 +4,7 @@
 GITHUB használata:
 - mindenki a saját branch-én dolgozik, melyeket a célnak megfelelően nevez el
 - commitokat, kódot, branch neveket az egyszerűség kedvéért lehetőleg angolul írjuk, dokumentációkat/wikit, issuekat magyarul a tárgykövetelmény miatt
-**git config --global user.name és .email commitolás előtt Git Bash-ben beírásra kerültek, ennek ellenére nem látszik a commitokon a név és inf-es email. Manuálisan a github settings-ben a felhasználónév megváltoztatása "Changing your username can have unintended side effects." warningot ad, ezért itt szeretnénk tisztázni, hogy ki milyen néven dolgozik:
+- git config --global user.name és .email commitolás előtt Git Bash-ben beírásra kerültek, ennek ellenére nem látszik a commitokon a név és inf-es email. Manuálisan a github settings-ben a felhasználónév megváltoztatása "Changing your username can have unintended side effects." warningot ad, ezért itt szeretnénk tisztázni, hogy ki milyen néven dolgozik:
 - faragobruno Faragó Brúnó ZVC7UI (zvc7ui@inf.elte.hu)
 - cszsofi3 Csákány Zsófia G41I7L (g41i7l@inf.elte.hu)
 - CsDavidB Csintalan Dávid Balázs X0YR3H (x0yr3h@inf.elte.hu)
@@ -32,3 +32,4 @@ vagy
 BACKEND:
 - futtatás
 - postman lekérdezések (pl. user létrehozás, ételek lekérdezése stb.) 
+- az adatbázissal való összekötés még jelenleg nem funkcionál jól, beégetett data.sql-el azonban ki lettek próbálva az endpointok (következő beadandóig javítva lesznek a hibák, kérem ezektől eltekinteni most)
