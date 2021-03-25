@@ -140,8 +140,7 @@ export default {
   methods: {
     toCart(p) {
       console.log(p);
-      let total = p.price * this.count;
-
+      //let total = p.price * this.count;
       this.product.cheese = this.cheeseBox;
       this.product.garlic = this.garlicBox;
       this.product.bacon = this.baconBox;

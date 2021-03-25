@@ -20,6 +20,13 @@
             <router-link to="/aboutus">
             <v-btn color="white" text rounded class="my-2">Rólunk</v-btn>
             </router-link>
+            <router-link to="/cart">
+            <cartbutton btnColor="btn btn-small btn-info btn-popup" :cartIcon="true" ><!--@click.native="showPopupCart()"-->
+            KOSÁR
+            <span class="btn-circle" v-if="false" ><!--hasProduct()--> {{ getProductsInCart.length }}
+            </span>
+            </cartbutton>
+            </router-link>
           </nav>
         </v-row>
         <v-spacer></v-spacer>
@@ -39,7 +46,11 @@
 </template>
 
 <script>
+import cartbutton from './views/CartButton';
 export default {
+  components: {
+    cartbutton,
+  },
   name: "App",
   data: () => ({
     totalprice: 0,
