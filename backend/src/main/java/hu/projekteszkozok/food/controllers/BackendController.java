@@ -4,6 +4,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import hu.projekteszkozok.food.repositories.UserRepository;
@@ -25,9 +27,15 @@ public class BackendController {
 
     @ResponseBody
     @RequestMapping(path = "/products")
-    public String products() {
+    public String products(@RequestParam("productList") String data) {
         LOG.info("GET called on /products resource");
-        return "browse products";
+        return "order data collected";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/allproducts", method = RequestMethod.POST)
+    public UserRepository allproducts() {
+        return this.userRepository;
     }
 
     
