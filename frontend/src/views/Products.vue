@@ -115,6 +115,12 @@
 </template>
 
 <script>
+import Vue from 'vue'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+ 
+Vue.use(VueAxios, axios)
+
 export default {
   name: "Products",
   data: () => ({
@@ -150,6 +156,8 @@ export default {
       this.count = 1;
       this.cart.push(this.product);
       console.log(this.cart);
+      this.send(this.cart);
+      
       this.closeProductInfo();
     },
     showProduct(p) {
@@ -172,6 +180,15 @@ export default {
       this.count = 1;
       this.product_info = false;
     },
+    send(productList) {
+        axios({
+        method: 'post',
+        url: 'https://httpbin.org/post',
+        data: productList
+        }).then(function (response) {
+    console.log("success : " + response);
+  });
+    }
   },
 };
 </script>
