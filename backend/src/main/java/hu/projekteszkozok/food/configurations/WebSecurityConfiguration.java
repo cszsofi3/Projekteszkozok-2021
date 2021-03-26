@@ -1,4 +1,4 @@
-package hu.projekteszkozok.food.configurations;
+/*package hu.projekteszkozok.food.configurations;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -22,4 +22,4 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         .and()
             .csrf().disable();
     }
-}
+}*/
