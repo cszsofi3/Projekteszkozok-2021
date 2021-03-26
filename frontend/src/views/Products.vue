@@ -183,7 +183,7 @@ export default {
     send(productList) {
         axios({
         method: 'post',
-        url: 'https://httpbin.org/post',
+        url: 'https://webhook.site/f6cacaf8-dcb3-47ea-a445-eca86f34156b',
         data: productList
         }).then(function (response) {
     console.log("success : " + response);
