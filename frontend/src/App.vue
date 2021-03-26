@@ -3,18 +3,30 @@
     <!-- Fenti navigációs sáv -->
     <v-card class="overflow-hidden" height="100%">
       <v-app-bar color="rgb(125, 214, 255)" dark>
-        <v-toolbar-title>Webshop</v-toolbar-title>
+        <v-toolbar-title>Ételrendelő Webalkalmazás</v-toolbar-title>
         <v-spacer></v-spacer>
         <!-- Tab elemek -->
         <v-row justify="center" no-gutters>
           <nav>
             <router-link to="/home">
-              <v-btn color="white" text rounded class="my-2">Home</v-btn>
+              <v-btn color="white" text rounded class="my-2">Főoldal</v-btn>
             </router-link>
             <router-link to="/products">
-              <v-btn color="white" text rounded class="my-2">Products</v-btn>
+              <v-btn color="white" text rounded class="my-2">Ételek</v-btn>
             </router-link>
-            <v-btn color="white" text rounded class="my-2">Contact Us</v-btn>
+            <router-link to="/contactus">
+            <v-btn color="white" text rounded class="my-2">Kapcsolat</v-btn>
+            </router-link>
+            <router-link to="/aboutus">
+            <v-btn color="white" text rounded class="my-2">Rólunk</v-btn>
+            </router-link>
+            <router-link to="/cart">
+            <cartbutton btnColor="btn btn-small btn-info btn-popup" :cartIcon="true" ><!--@click.native="showPopupCart()"-->
+            KOSÁR
+            <span class="btn-circle" v-if="false" ><!--hasProduct()--> {{ getProductsInCart.length }}
+            </span>
+            </cartbutton>
+            </router-link>
           </nav>
         </v-row>
         <v-spacer></v-spacer>
@@ -26,7 +38,7 @@
     <v-footer>
       <div>
         {{ new Date().getFullYear() }} —
-        <strong>Webshop</strong>
+        <strong>Ételrendelő Webalkalmazás</strong>
       </div>
     </v-footer>
     <v-content></v-content>
@@ -34,7 +46,11 @@
 </template>
 
 <script>
+import cartbutton from './views/CartButton';
 export default {
+  components: {
+    cartbutton,
+  },
   name: "App",
   data: () => ({
     totalprice: 0,
