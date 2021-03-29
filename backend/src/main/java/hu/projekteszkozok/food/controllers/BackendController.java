@@ -1,14 +1,16 @@
 package hu.projekteszkozok.food.controllers;
+import hu.projekteszkozok.food.entities.Food;
+import hu.projekteszkozok.food.entities.User;
+import hu.projekteszkozok.food.repositories.FoodRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import hu.projekteszkozok.food.repositories.UserRepository;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/api")
@@ -17,6 +19,8 @@ public class BackendController {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private FoodRepository foodRepository;
 
     @ResponseBody
     @RequestMapping(path = "/home")
@@ -26,17 +30,32 @@ public class BackendController {
     }
 
     @ResponseBody
-    @RequestMapping(path = "/products")
-    public String products(@RequestParam("productList") String data) {
+    @RequestMapping(value = "/products",  method = RequestMethod.GET)
+    public String products(@RequestParam(value = "productList",required = false) Object data) {
         LOG.info("GET called on /products resource");
-        return "order data collected";
+        if(data!=null) return "order data collected";
+        else return "no data given";
     }
 
     @ResponseBody
-    @RequestMapping(value = "/allproducts", method = RequestMethod.POST)
-    public UserRepository allproducts() {
-        return this.userRepository;
+    @RequestMapping(path = "/allproducts", method = RequestMethod.GET)
+    public List<Food> allproducts() {
+        return this.foodRepository.findAll();
     }
 
-    
+    @ResponseBody
+    @RequestMapping(value = "/allusers", method = RequestMethod.GET)
+    public List<User> allusers() {
+        return this.userRepository.findAll();
+    }
+
+    @ResponseBody
+    @GetMapping(path = "/user/{id}")
+    public User getUserById(@PathVariable("id") int id) throws RuntimeException {
+
+        return this.userRepository.findById(id).map(user -> {
+            LOG.info("Reading user with id " + id + " from database.");
+            return user;
+        }).orElseThrow(() -> new RuntimeException("user with id: " + id + " not found"));
+    }
 }

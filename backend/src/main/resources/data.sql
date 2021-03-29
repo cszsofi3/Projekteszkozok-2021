@@ -10,9 +10,9 @@ INSERT INTO BASKET_FOOD(name, price, owner_id) VALUES ('Cheese', 2000, 1);
 
 -- INSERT INTO BASKET(user_id) VALUES(1);
 
-INSERT INTO INGREDIENT(name) VALUES('tomato');
-INSERT INTO INGREDIENT(name) VALUES('mushrooms');
-INSERT INTO INGREDIENT(name) VALUES('cheddar');
+INSERT INTO INGREDIENT(name,price) VALUES('tomato',200);
+INSERT INTO INGREDIENT(name,price) VALUES('mushrooms',300);
+INSERT INTO INGREDIENT(name,price) VALUES('cheddar',250);
 
 INSERT INTO FOOD_INGREDIENT(food_id, ingredient_id) VALUES(1,1);
 INSERT INTO FOOD_INGREDIENT(food_id, ingredient_id) VALUES(1,3);
