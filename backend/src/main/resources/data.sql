@@ -1,6 +1,7 @@
 INSERT INTO users(name, basket_price) VALUES('George', 0);
 INSERT INTO users(name, basket_price) VALUES('Kate', 0);
 INSERT INTO users(name, basket_price) VALUES('Lotte', 0);
+INSERT INTO users(name, basket_price) VALUES('Steve', 0);
 
 INSERT INTO FOOD(name, type, price) VALUES('Margherita', 'PIZZA', 1500);
 INSERT INTO FOOD(name, type, price) VALUES('Cheese', 'HAMBURGER', 2000);
