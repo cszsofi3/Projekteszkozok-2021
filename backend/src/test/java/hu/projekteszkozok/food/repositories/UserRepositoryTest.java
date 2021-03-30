@@ -27,6 +27,6 @@ class UserRepositoryTest {
     void findUserById() {
         User user = users.findUserById(2);
 
-        assertNotEquals(null,user.getName());
+        assertNotEquals("",user.getName());
     }
 }

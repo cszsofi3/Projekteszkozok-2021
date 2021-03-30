@@ -1,5 +1,6 @@
 package hu.projekteszkozok.food.controllers;
 import hu.projekteszkozok.food.entities.Food;
+import hu.projekteszkozok.food.entities.Ingredient;
 import hu.projekteszkozok.food.entities.User;
 import hu.projekteszkozok.food.repositories.FoodRepository;
 import org.slf4j.Logger;
@@ -58,4 +59,10 @@ public class BackendController {
             return user;
         }).orElseThrow(() -> new RuntimeException("user with id: " + id + " not found"));
     }
+
+    /*@ResponseBody // used for testing
+    @RequestMapping(path = "/productingredients", method = RequestMethod.GET)
+    public List<Ingredient> productingredients() {
+        return this.foodRepository.findAll().get(0).getIngredient();
+    }*/
 }

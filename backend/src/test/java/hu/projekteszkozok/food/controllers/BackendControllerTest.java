@@ -105,4 +105,14 @@ class BackendControllerTest {
             .assertThat()
             .body(is(not(equalTo(null))));
     }
+
+    /*@Test //used for testing
+    void productingredients() {
+        when()
+                .get("/api/productingredients")
+                .then()
+                .statusCode(HttpStatus.SC_OK)
+                .assertThat()
+                .body(is(equalTo(null)));
+    }*/
 }
