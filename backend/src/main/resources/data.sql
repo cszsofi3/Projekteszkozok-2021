@@ -15,8 +15,8 @@ INSERT INTO INGREDIENT(name,price) VALUES('tomato',200);
 INSERT INTO INGREDIENT(name,price) VALUES('mushrooms',300);
 INSERT INTO INGREDIENT(name,price) VALUES('cheddar',250);
 
-INSERT INTO FOOD_INGREDIENT(food_id, ingredient_id) VALUES(1,1);
-INSERT INTO FOOD_INGREDIENT(food_id, ingredient_id) VALUES(1,3);
+-- INSERT INTO FOOD_INGREDIENT(food_id, ingredient_id) VALUES(1,1);
+-- INSERT INTO FOOD_INGREDIENT(food_id, ingredient_id) VALUES(1,3);
 
 -- INSERT INTO BASKET_FOOD_EXTRA_INGREDIENT(basket_food_id, extra_ingredient_id) VALUES(1,1);
 
