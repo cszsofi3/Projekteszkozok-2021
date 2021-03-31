@@ -123,7 +123,7 @@ Vue.use(VueAxios, axios)
 
 export default {
   name: "Products",
-  data: () => ({
+  data: () => ( { 
     events: [],
     product_info: false,
     num: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
@@ -145,7 +145,7 @@ export default {
   }),
   methods: {
     toCart(p) {
-      console.log(p);
+      //console.log(p);
       //let total = p.price * this.count;
       this.product.cheese = this.cheeseBox;
       this.product.garlic = this.garlicBox;
@@ -155,9 +155,9 @@ export default {
       // this.$emit("products", p, this.count);
       this.count = 1;
       this.cart.push(this.product);
-      console.log(this.cart);
-      this.send(this.cart);
-      
+      //console.log(this.cart);
+      //this.send(this.cart);
+      this.get();
       this.closeProductInfo();
     },
     showProduct(p) {
@@ -180,15 +180,47 @@ export default {
       this.count = 1;
       this.product_info = false;
     },
+    get(){
+      axios({
+        method: 'get',
+        url: 'http://localhost:8080/food/all',
+        }).then(function (response) {
+    console.log("success : " );
+    response.data.forEach(element => {
+      console.log(element.name+" \n");
+    })
+    //return this.toFoodList(response.data);
+  }).catch(function (response) {
+    console.log("catch : " + response);
+  });
+    },
     send(productList) {
         axios({
         method: 'post',
-        url: 'https://webhook.site/f6cacaf8-dcb3-47ea-a445-eca86f34156b',
+        url: '/Orders',
         data: productList
         }).then(function (response) {
     console.log("success : " + response);
   });
-    }
+    },
+  toFoodList(responseData){
+    var listFood = [];
+    var newId = 0;
+    responseData.forEach(element => {
+      listFood[newId].id = element.id;
+      listFood[newId].description = element.name;
+      listFood[newId].name = element.type;
+      listFood[newId].price = element.price;
+      listFood[newId].img= "";
+      listFood[newId].bacon="";
+      listFood[newId].cheese= "";
+      listFood[newId].garlic= "";
+      newId++;
+    });
+    console.log("toFoodlist:   "  + listFood);
+    return listFood;
+
+  },
   },
 };
 </script>
