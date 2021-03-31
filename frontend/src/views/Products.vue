@@ -1,42 +1,54 @@
 <template>
   <v-app id="inspire">
     <!-- Food -->
-    <v-container>
-      <v-hover v-slot:default="{ hover }">
-        <v-card
-          class="mx-auto mt-9"
-          color="grey lighten-4"
-          max-width="300"
-          :elevation="hover ? 15 : 2"
-        >
-          <v-img :aspect-ratio="3 / 2">
-            <v-expand-transition>
-              <div
-                v-if="hover"
-                class="d-flex transition-fast-in-fast-out blue darken-2 v-card--reveal display-3 white--text"
-                style="height: 100%"
+    <v-container >
+      <v-row>
+          <v-col sm="4" v-for="product in events" :key="product.id">
+            <v-hover v-slot:default="{ hover }">
+              <v-card
+                class="mx-auto mt-9"
+                color="grey lighten-4"
+                max-width="300"
+                :elevation="hover ? 15 : 2"
               >
-                ${{ product.price }}
-              </div>
-            </v-expand-transition>
-          </v-img>
-          <v-card-text class="pt-6" style="position: relative">
-            <h4 class="display-1 font-weight-light blue--text mb-2">
-              {{ product.name }}
-            </h4>
-          </v-card-text>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn
-              color="light-blue white--text"
-              @click="showProduct(product)"
-              outlined
-              rounded
-              >Edit</v-btn
-            >
-          </v-card-actions>
-        </v-card>
-      </v-hover>
+                <v-img :aspect-ratio="3/2" :src="product.img">
+                  <v-expand-transition>
+                    <div
+                      v-if="hover"
+                      class="d-flex transition-fast-in-fast-out blue darken-2 v-card--reveal display-3 white--text"
+                      style="height: 100%;"
+                    >${{product.price}}</div>
+                  </v-expand-transition>
+                </v-img>
+                <v-card-text class="pt-6" style="position: relative;">
+                  <v-btn
+                    absolute
+                    color="blue"
+                    class="white--text"
+                    fab
+                    large
+                    right
+                    top
+                    @click="toCart(product)"
+                  >
+                    <v-icon>mdi-cart</v-icon>
+                  </v-btn>
+                  <div class="font-weight-light title mb-2">Only {{product.quantity}} left!</div>
+                  <h4 class="display-1 font-weight-light blue--text mb-2">{{product.name}}</h4>
+                </v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                    color="light-blue white--text"
+                    @click="showProduct(product)"
+                    outlined
+                    rounded
+                  >About the product</v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-hover>
+          </v-col>
+        </v-row>
     </v-container>
     <!-- Food info -->
     <v-dialog v-model="product_info" width="700" persistent>
@@ -115,15 +127,15 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import axios from 'axios'
-import VueAxios from 'vue-axios'
- 
-Vue.use(VueAxios, axios)
+import Vue from "vue";
+import axios from "axios";
+import VueAxios from "vue-axios";
+
+Vue.use(VueAxios, axios);
 
 export default {
   name: "Products",
-  data: () => ( { 
+  data: () => ({
     events: [],
     product_info: false,
     num: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
@@ -180,48 +192,51 @@ export default {
       this.count = 1;
       this.product_info = false;
     },
-    get(){
-      axios({
-        method: 'get',
-        url: 'http://localhost:8080/food/all',
-        }).then(function (response) {
-    console.log("success : " );
-    response.data.forEach(element => {
-      console.log(element.name+" \n");
-    })
-    //return this.toFoodList(response.data);
-  }).catch(function (response) {
-    console.log("catch : " + response);
-  });
+    async get() {
+      await axios({
+        method: "get",
+        url: "http://localhost:8080/food/all",
+      })
+        .then((response) => {
+          //console.log("success : ");
+         //console.log(response.data);
+         //return response.data;
+          this.toFoodList(response.data);
+        })
+        .catch(function (response) {
+          console.log("catch : " + response);
+        });
     },
-    send(productList) {
-        axios({
-        method: 'post',
-        url: '/Orders',
-        data: productList
-        }).then(function (response) {
-    console.log("success : " + response);
-  });
+    async send(productList) {
+      await axios({
+        method: "post",
+        url: "/Orders",
+        data: productList,
+      }).then(function (response) {
+        console.log("success : " + response);
+      });
     },
-  toFoodList(responseData){
-    var listFood = [];
-    var newId = 0;
-    responseData.forEach(element => {
-      listFood[newId].id = element.id;
-      listFood[newId].description = element.name;
-      listFood[newId].name = element.type;
-      listFood[newId].price = element.price;
-      listFood[newId].img= "";
-      listFood[newId].bacon="";
-      listFood[newId].cheese= "";
-      listFood[newId].garlic= "";
-      newId++;
-    });
-    console.log("toFoodlist:   "  + listFood);
-    return listFood;
-
+    toFoodList(responseData) {
+      var listFood = [];
+      console.log(responseData);
+      responseData.forEach(element => {
+        var product = { };
+        product.id = element.id;
+        product.description = element.name;
+        product.name = element.type;
+        product.price = element.price;
+        product.img = "";
+        product.bacon = "";
+        product.cheese = "";
+        product.garlic = "";
+        listFood.push(product);
+      });
+      this.events = listFood;
+    },
   },
-  },
+  mounted(){
+    this.toFoodList(this.get());
+  }
 };
 </script>
 
