@@ -18,6 +18,7 @@ public class FoodController {
     @Autowired
     private FoodRepository foodRepository;
 
+    @CrossOrigin
     @GetMapping("/all")
     public Iterable<Food> listAllFood() {
         return foodRepository.findAll();
@@ -28,6 +29,7 @@ public class FoodController {
         return foodRepository.findFoodById(id);
     }
 
+    @CrossOrigin
     @GetMapping("/pizza")
     public List<Food> listPizzas() {
         return foodService.listFoodByType(Type.PIZZA);
