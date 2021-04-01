@@ -33,3 +33,7 @@ BACKEND:
 - futtatás
 - postman lekérdezések (pl. user létrehozás, ételek lekérdezése stb.) 
 - az adatbázissal való összekötés még jelenleg nem funkcionál jól, beégetett data.sql-el azonban ki lettek próbálva az endpointok (következő beadandóig javítva lesznek a hibák, kérem ezektől eltekinteni most)
+
+MÁSODIK BEADANDÓ (CI):
+- Az Actions fül alatt találhatók a workflow futások (CI dashboard) amelyekből egyre rákattintva látható a CI futása. Az artifact a package fájlban található. A .github/workflows mappában található a CI configja. A CI-ban a megírt tesztek is lefutnak, melyek a Build stageben láthatók.
+
