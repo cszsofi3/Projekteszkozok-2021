@@ -15,25 +15,29 @@
               <v-btn color="white" text rounded class="my-2">Ételek</v-btn>
             </router-link>
             <router-link to="/contactus">
-            <v-btn color="white" text rounded class="my-2">Kapcsolat</v-btn>
+              <v-btn color="white" text rounded class="my-2">Kapcsolat</v-btn>
             </router-link>
             <router-link to="/aboutus">
-            <v-btn color="white" text rounded class="my-2">Rólunk</v-btn>
+              <v-btn color="white" text rounded class="my-2">Rólunk</v-btn>
             </router-link>
-            <router-link to="/cart">
-            <cartbutton btnColor="btn btn-small btn-info btn-popup" :cartIcon="true" ><!--@click.native="showPopupCart()"-->
-            KOSÁR
-            <span class="btn-circle" v-if="false" ><!--hasProduct()--> {{ getProductsInCart.length }}
-            </span>
-            </cartbutton>
+            <router-link v-if="cartnum != 0" to="/cart">
+              <v-btn color="white" text rounded class="my-2">
+                <v-badge
+                  color="blue"
+                  :content="cartnum"
+                  :value="cartnum"
+                  bottom
+                >
+                  <v-icon>mdi-cart</v-icon>
+                </v-badge>
+              </v-btn>
             </router-link>
           </nav>
         </v-row>
-        <v-spacer></v-spacer>
       </v-app-bar>
     </v-card>
     <!-- Router -->
-    <router-view/>
+    <router-view @cartNum="setCartNum" />
     <!-- Footer -->
     <v-footer>
       <div>
@@ -46,29 +50,30 @@
 </template>
 
 <script>
-import cartbutton from './views/CartButton';
 export default {
-  components: {
-    cartbutton,
-  },
+  components: {},
   name: "App",
   data: () => ({
     totalprice: 0,
     admin: false,
     products: [],
     login: false,
+    cartnum: 0,
     form: {
       img: "",
       name: "",
       price: "",
-      quantity: ""
+      quantity: "",
     },
     menu: false,
     currNum: 1,
-    prodnum: 0
+    prodnum: 0,
   }),
   methods: {
-  }
+    setCartNum(num) {
+      this.cartnum += num;
+    },
+  },
 };
 </script>
 <style scoped>

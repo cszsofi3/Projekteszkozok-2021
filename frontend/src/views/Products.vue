@@ -127,19 +127,20 @@
 </template>
 
 <script>
-import Vue from "vue";
-import axios from "axios";
-import VueAxios from "vue-axios";
+//import axios from "axios";
+//import VueAxios from "vue-axios";
 
-Vue.use(VueAxios, axios);
+//Vue.use(VueAxios, axios);
 
 export default {
   name: "Products",
+  props: ["app"],
   data: () => ({
     events: [],
     product_info: false,
     num: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-    count: 0,
+    count: 1,
+    total:0,
     cheeseBox: false,
     garlicBox: false,
     baconBox: false,
@@ -152,23 +153,26 @@ export default {
       bacon: "",
       cheese: "",
       garlic: "",
+      count:0,
     },
     cart: [],
   }),
+  mounted(){
+    //this.toFoodList(this.get());
+    
+    this.toCart();    //csak tesztelés miatt van
+  },
   methods: {
-    toCart(p) {
-      //console.log(p);
-      //let total = p.price * this.count;
+    toCart() {
       this.product.cheese = this.cheeseBox;
       this.product.garlic = this.garlicBox;
       this.product.bacon = this.baconBox;
-      // this.$emit("newnum", this.count);
-      // this.$emit("price", total);
-      // this.$emit("products", p, this.count);
-      this.count = 1;
+      this.product.count = this.count;
+
+      this.total += this.count;
+      this.$emit("cartNum", this.total);
+
       this.cart.push(this.product);
-      //console.log(this.cart);
-      //this.send(this.cart);
       this.get();
       this.closeProductInfo();
     },
@@ -178,7 +182,7 @@ export default {
       this.product.description = p.description;
       this.product.id = p.id;
       this.product.name = p.name;
-      this.count = 1;
+      this.product.count = 1;
       this.product_info = true;
     },
     closeProductInfo() {
@@ -189,11 +193,11 @@ export default {
       this.baconBox = false;
       this.garlicBox = false;
 
-      this.count = 1;
+      this.product.count = 1;
       this.product_info = false;
     },
     async get() {
-      await axios({
+      /*await axios({
         method: "get",
         url: "http://localhost:8080/food/all",
       })
@@ -205,16 +209,16 @@ export default {
         })
         .catch(function (response) {
           console.log("catch : " + response);
-        });
+        });*/
     },
     async send(productList) {
-      await axios({
+      /*await axios({
         method: "post",
         url: "/Orders",
         data: productList,
       }).then(function (response) {
         console.log("success : " + response);
-      });
+      });*/
     },
     toFoodList(responseData) {
       var listFood = [];
@@ -226,6 +230,7 @@ export default {
         product.name = element.type;
         product.price = element.price;
         product.img = "";
+        product.count = 1;
         product.bacon = "";
         product.cheese = "";
         product.garlic = "";
@@ -234,9 +239,6 @@ export default {
       this.events = listFood;
     },
   },
-  mounted(){
-    this.toFoodList(this.get());
-  }
 };
 </script>
 
