@@ -7,12 +7,10 @@
       hide-delimiter-background
       show-arrows-on-hover
     >
-      <v-carousel-item v-for="(color, i) in colors" :key="color">
-        <v-sheet :color="color" height="100%" tile>
-          <v-row class="fill-height" align="center" justify="center">
-            <div class="display-3">Slide {{ i + 1 }}</div>
-          </v-row>
-        </v-sheet>
+      <v-carousel-item v-for="(item, i) in items" :key="i" :src="item.src">
+        <v-row class="fill-height" align="center" justify="center">
+          <div class="display-3">{{ item.text }}</div>
+        </v-row>
       </v-carousel-item>
     </v-carousel>
     <v-container>
@@ -22,10 +20,11 @@
         >
         <v-flex>
           <div class="headline mt-3">Hogy miért éri meg nálunk rendelned?</div>
-          <p class="subheading mt-3">
-            Nézd meg miért!
-          </p>
+          <p class="subheading mt-3">Nézd meg miért!</p>
         </v-flex>
+        <v-btn class="home-btn" color="primary" rounded @click="redirectToAboutUs()">
+          Ételeink
+        </v-btn>
         <v-divider></v-divider>
         <v-flex>
           <div class="headline mt-3">Partnereink</div>
@@ -38,6 +37,9 @@
             ...és sok más!<br />
           </p>
         </v-flex>
+        <v-btn class="home-btn" color="primary" rounded @click="redirectToContact()">
+          Kapcsolat
+        </v-btn>
         <v-divider></v-divider>
         <v-flex>
           <div class="headline mt-3">Ingyenes házhozszállítás!</div>
@@ -45,6 +47,9 @@
             1000 Ft értékű rendelés felett a szállításért nem kell fizess!<br />
           </p>
         </v-flex>
+        <v-btn class="home-btn" color="primary" rounded @click="redirectToAboutUs()">
+          Rólunk
+        </v-btn>
       </v-layout>
     </v-container>
   </v-app>
@@ -55,12 +60,51 @@ export default {
   name: "Home",
   data: () => ({
     carousel: true,
-    colors: ["primary", "secondary", "yellow darken-2", "red", "orange"],
-    //Ide egy objektum tömb kell amiből dolgozik a carousel: kép, dia neve
+    items: [
+      {
+        id: 1,
+        src: require("../assets/food1.jpg"),
+        text: "Élvezd az ételeket",
+      },
+      {
+        id: 2,
+        src: require("../assets/food2.jpg"),
+        text: "Ízleld meg a világot",
+      },
+      {
+        id: 3,
+        src: require("../assets/hamburger1.jpg"),
+        text: "Zamatos hamburgerek",
+      },
+      {
+        id: 4,
+        src: require("../assets/hamburger2.jpg"),
+        text: "Találd meg a kedvenc éttermed",
+      },
+      {
+        id: 5,
+        src: require("../assets/pancakes.jpg"),
+        text: "A nap bármelyik pontjában",
+      },
+    ],
   }),
+  methods: {
+    redirectToFood() {
+      this.$router.replace({ name: "products" });
+    },
+    redirectToContact() {
+      this.$router.replace({ name: "contactus" });
+    },
+    redirectToAboutUs() {
+      this.$router.replace({ name: "aboutus" });
+    },
+  },
 };
-
 </script>
 
 <style>
+.home-btn{
+  width: 120px;
+  margin-bottom: 10px;
+}
 </style>
