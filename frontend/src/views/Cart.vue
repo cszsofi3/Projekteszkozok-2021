@@ -69,7 +69,7 @@
             ></v-text-field>
           </v-col>
           <v-col cols="9">
-            <v-btn color="primary" rounded @click="checkCoupon()">
+            <v-btn color="red" dark rounded @click="checkCoupon()">
               Enter
             </v-btn>
           </v-col>
@@ -77,7 +77,7 @@
         <v-card-actions>
           <template> Total price: {{ price }}$ </template>
           <v-spacer></v-spacer>
-          <v-btn color="primary" rounded @click="order()"> Order food </v-btn>
+          <v-btn color="red" dark rounded @click="order()"> Order food </v-btn>
         </v-card-actions>
       </v-card>
     </v-container>

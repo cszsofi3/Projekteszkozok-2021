@@ -22,7 +22,7 @@
           <div class="headline mt-3">Hogy miért éri meg nálunk rendelned?</div>
           <p class="subheading mt-3">Nézd meg miért!</p>
         </v-flex>
-        <v-btn class="home-btn" color="primary" rounded @click="redirectToAboutUs()">
+        <v-btn class="home-btn" color="red" dark rounded @click="redirectToAboutUs()">
           Ételeink
         </v-btn>
         <v-divider></v-divider>
@@ -37,7 +37,7 @@
             ...és sok más!<br />
           </p>
         </v-flex>
-        <v-btn class="home-btn" color="primary" rounded @click="redirectToContact()">
+        <v-btn class="home-btn" color="red" dark rounded @click="redirectToContact()">
           Kapcsolat
         </v-btn>
         <v-divider></v-divider>
@@ -47,7 +47,7 @@
             1000 Ft értékű rendelés felett a szállításért nem kell fizess!<br />
           </p>
         </v-flex>
-        <v-btn class="home-btn" color="primary" rounded @click="redirectToAboutUs()">
+        <v-btn class="home-btn" color="red" dark rounded @click="redirectToAboutUs()">
           Rólunk
         </v-btn>
       </v-layout>

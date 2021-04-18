@@ -1,8 +1,8 @@
 <template>
   <v-app id="inspire">
     <!-- Fenti navigációs sáv -->
-    <v-card class="overflow-hidden" height="100%">
-      <v-app-bar color="rgb(125, 214, 255)" dark>
+    <v-card class="overflow-hidden" height="100%" >
+      <v-app-bar color="rgb(175, 0, 0)" dark>
         <v-toolbar-title>Ételrendelő Webalkalmazás</v-toolbar-title>
         <v-spacer></v-spacer>
         <!-- Tab elemek -->
@@ -23,10 +23,11 @@
             <router-link v-if="cartnum != 0" to="/cart">
               <v-btn color="white" text rounded class="my-2">
                 <v-badge
-                  color="blue"
+                  color="red"
                   :content="cartnum"
                   :value="cartnum"
                   bottom
+                  dark
                 >
                   <v-icon>mdi-cart</v-icon>
                 </v-badge>
