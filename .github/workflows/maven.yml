@@ -36,7 +36,4 @@ jobs:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
-    - run: cd frontend
-    - run: npm install    
-    - run: npm run install:eslint
-    - run: npm run lint
+    - run: cd frontend && npm install && npm run install:eslint && npm run lint
