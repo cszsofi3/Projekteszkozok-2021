@@ -37,3 +37,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - run: cd frontend && npm install && npm run install:eslint && npm run lint
+    - uses: actions/upload-artifact@v2
+      with:
+       name: ExtraToolsLog
+       path: C:\npm\cache\_logs\
