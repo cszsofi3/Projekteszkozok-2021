@@ -35,6 +35,7 @@ jobs:
   extra_tools:
     runs-on: windows-latest
     steps:
+    - uses: actions/checkout@v2
     - run: cd frontend
     - run: npm install    
     - run: npm run install:eslint
