@@ -14,6 +14,7 @@
               <v-list-item-content>
                 <v-list-item-title v-html="item.name"></v-list-item-title>
                 <v-list-item-subtitle
+                  v-if="item.garlic || item.bacon || item.cheese"
                   v-text="'Feltétek: '"
                 ></v-list-item-subtitle>
                 <v-list-item-subtitle
@@ -86,9 +87,7 @@
         <v-container fluid>
           <v-list-item>
             <v-list-item-content>
-              <v-list-item-title
-                >{{ productToEdit.name }}</v-list-item-title
-              >
+              <v-list-item-title>{{ productToEdit.name }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item>
@@ -100,9 +99,7 @@
           </v-list-item>
           <v-list-item width="80px">
             <v-list-item-content>
-              <v-list-item-title
-                >Feltétek: </v-list-item-title
-              >
+              <v-list-item-title>Feltétek: </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item width="80px">
@@ -133,7 +130,7 @@
             </v-list-item-content>
           </v-list-item>
         </v-container>
-          <v-card-actions>
+        <v-card-actions>
           <v-btn
             color="light-blue white--text"
             text
@@ -166,11 +163,11 @@ export default {
     editDialog: false,
     coupon: "",
     usedCoupon: false,
-    goodCoupon:false,
-    couponHint:"",
+    goodCoupon: false,
+    couponHint: "",
     coupons: ["ABCDEFG", "1234567", "HESOYAM"],
-    productToEdit:{
-      id:0,
+    productToEdit: {
+      id: 0,
       price: 0,
       name: "",
       bacon: false,
@@ -214,9 +211,9 @@ export default {
       {
         img: "",
         price: 50,
-        description: "Apple",
+        description: "Sushi",
         id: 3,
-        name: "Alma",
+        name: "Sushi",
         bacon: "",
         cheese: true,
         garlic: "",
@@ -245,11 +242,7 @@ export default {
       return false; //this.getProductsInCart.length > 0;
     },
     totalPrice() {
-      /*return this.getProductsInCart.reduce(
-        (current, next) => current + next.price,
-        0
-      );*/
-      if(this.test_datas.length < 1){
+      if (this.test_datas.length < 1) {
         this.price = 0;
         return;
       }
@@ -260,11 +253,11 @@ export default {
       this.price = total;
     },
     remove(index) {
-      if(this.test_datas.length < 2){
+      if (this.test_datas.length < 2) {
         this.test_datas.pop();
         return;
       }
-      this.test_datas.splice(index,1);
+      this.test_datas.splice(index, 1);
       // itt hívd meg újra a lekérdezést, hogy frissüljön a lista, és emit-eld az App-nak, hogy hány elem lett remove-olva ( count * -1)
 
       this.totalPrice();
@@ -273,7 +266,7 @@ export default {
       //TODO
     },
     edit(item) {
-      Object.assign(this.productToEdit,item);
+      Object.assign(this.productToEdit, item);
       this.cheeseBox = item.cheese;
       this.baconBox = item.bacon;
       this.garlicBox = item.garlic;
@@ -294,15 +287,16 @@ export default {
           this.goodCoupon = true;
         }
       }
-      if(!this.usedCoupon){
-        if(this.goodCoupon){
+      if (!this.usedCoupon) {
+        if (this.goodCoupon) {
           this.usedCoupon = true;
-          this.price = this.price*0.9;
-          this.couponHint = "Kupon sikeresen felhasználva! -10% a végösszegből.";
-        }else{
+          this.price = this.price * 0.9;
+          this.couponHint =
+            "Kupon sikeresen felhasználva! -10% a végösszegből.";
+        } else {
           this.couponHint = "Rossz kupon!";
         }
-      }else{
+      } else {
         this.couponHint = "Ez már egy felhasznált/lejárt kupon!";
       }
     },
