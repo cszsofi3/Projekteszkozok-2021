@@ -127,10 +127,8 @@
 </template>
 
 <script>
-//import axios from "axios";
-//import VueAxios from "vue-axios";
 
-//Vue.use(VueAxios, axios);
+import { axios } from "@/main";
 
 export default {
   name: "Products",
@@ -159,8 +157,8 @@ export default {
   }),
   mounted(){
     //this.toFoodList(this.get());
-    
     this.toCart();    //csak tesztelés miatt van
+    //this.get();
   },
   methods: {
     toCart() {
@@ -196,20 +194,18 @@ export default {
       this.product.count = 1;
       this.product_info = false;
     },
-    async get() {
-      /*await axios({
+    get() {
+      axios({
         method: "get",
         url: "http://localhost:8080/food/all",
       })
         .then((response) => {
-          //console.log("success : ");
-         //console.log(response.data);
-         //return response.data;
+          console.log("sikeres get");
           this.toFoodList(response.data);
         })
         .catch(function (response) {
           console.log("catch : " + response);
-        });*/
+        });
     },
     async send(productList) {
       /*await axios({
