@@ -81,9 +81,59 @@
       </v-card>
     </v-container>
     <!-- Dialog -->
-    <v-dialog v-model="editDialog" width="200" persistent>
+    <v-dialog v-model="editDialog" width="300" persistent>
       <v-card>
-        <v-card-actions>
+        <v-container fluid>
+          <v-list-item>
+            <v-list-item-content>
+              <v-list-item-title
+                >{{ productToEdit.name }}</v-list-item-title
+              >
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item>
+            <v-list-item-content>
+              <v-list-item-title
+                >Ár: {{ productToEdit.price }}$</v-list-item-title
+              >
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item width="80px">
+            <v-list-item-content>
+              <v-list-item-title
+                >Feltétek: </v-list-item-title
+              >
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item width="80px">
+            <v-list-item-content>
+              <v-list-item-title
+                ><v-checkbox v-model="cheeseBox">
+                  <template v-slot:label> <div>Sajt</div></template>
+                </v-checkbox>
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item width="80px">
+            <v-list-item-content>
+              <v-list-item-title
+                ><v-checkbox v-model="garlicBox">
+                  <template v-slot:label> <div>Fokhagyma</div></template>
+                </v-checkbox></v-list-item-title
+              >
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item width="80px">
+            <v-list-item-content>
+              <v-list-item-title
+                ><v-checkbox v-model="baconBox">
+                  <template v-slot:label> <div>Bacon</div></template>
+                </v-checkbox></v-list-item-title
+              >
+            </v-list-item-content>
+          </v-list-item>
+        </v-container>
+          <v-card-actions>
           <v-btn
             color="light-blue white--text"
             text
@@ -119,6 +169,17 @@ export default {
     goodCoupon:false,
     couponHint:"",
     coupons: ["ABCDEFG", "1234567", "HESOYAM"],
+    productToEdit:{
+      id:0,
+      price: 0,
+      name: "",
+      bacon: false,
+      cheese: false,
+      garlic: false,
+    },
+    cheeseBox: false,
+    garlicBox: false,
+    baconBox: false,
     test_datas: [
       {
         img: "",
@@ -155,7 +216,7 @@ export default {
         price: 50,
         description: "Apple",
         id: 3,
-        name: "Apple",
+        name: "Alma",
         bacon: "",
         cheese: true,
         garlic: "",
@@ -212,13 +273,21 @@ export default {
       //TODO
     },
     edit(item) {
-      //TODO
+      Object.assign(this.productToEdit,item);
+      this.cheeseBox = item.cheese;
+      this.baconBox = item.bacon;
+      this.garlicBox = item.garlic;
       this.editDialog = true;
     },
     closeEditDialog() {
       this.editDialog = false;
     },
-    save() {},
+    save() {
+      this.test_datas[this.productToEdit.id].garlic = this.garlicBox;
+      this.test_datas[this.productToEdit.id].cheese = this.cheeseBox;
+      this.test_datas[this.productToEdit.id].bacon = this.baconBox;
+      this.editDialog = false;
+    },
     checkCoupon() {
       for (let i = 0; i < this.coupons.length; i++) {
         if (this.coupon == this.coupons[i]) {
