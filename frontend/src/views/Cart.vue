@@ -3,7 +3,7 @@
     <!-- Food in cart -->
     <v-container fluid>
       <v-card width="800px" class="mx-auto" :elevation="5">
-        <v-card-title> My Cart </v-card-title>
+        <v-card-title> Kosár </v-card-title>
         <v-divider></v-divider>
         <v-list three-line>
           <template v-for="item in test_datas">
@@ -14,11 +14,11 @@
               <v-list-item-content>
                 <v-list-item-title v-html="item.name"></v-list-item-title>
                 <v-list-item-subtitle
-                  v-text="'Toppings: '"
+                  v-text="'Feltétek: '"
                 ></v-list-item-subtitle>
                 <v-list-item-subtitle
                   v-if="item.garlic == true"
-                  v-text="'- Garlic '"
+                  v-text="'- Fokhagyma '"
                 ></v-list-item-subtitle>
                 <v-list-item-subtitle
                   v-if="item.bacon == true"
@@ -26,11 +26,11 @@
                 ></v-list-item-subtitle>
                 <v-list-item-subtitle
                   v-if="item.cheese == true"
-                  v-text="'- Cheese '"
+                  v-text="'- Sajt '"
                 ></v-list-item-subtitle>
                 <v-list-item-subtitle
                   class="text--primary"
-                  v-text="'Total price: ' + item.price + '$'"
+                  v-text="'Teljes ár: ' + item.price + '$'"
                 ></v-list-item-subtitle>
               </v-list-item-content>
               <v-list-item-action>
@@ -49,7 +49,7 @@
                   rounded
                   class="my-2"
                   @click="edit(item)"
-                  >Edit
+                  >Szerkesztés
                   <v-icon small>mdi-pencil</v-icon>
                 </v-btn>
               </v-list-item-action>
@@ -74,9 +74,9 @@
           </v-col>
         </v-row>
         <v-card-actions>
-          <template> Total price: {{ price }}$ </template>
+          <template> Végösszeg: {{ price }}$ </template>
           <v-spacer></v-spacer>
-          <v-btn color="red" dark rounded @click="order()"> Order food </v-btn>
+          <v-btn color="red" dark rounded @click="order()"> Megrendelés </v-btn>
         </v-card-actions>
       </v-card>
     </v-container>
@@ -90,7 +90,7 @@
             @click="closeEditDialog()"
             rounded
             outlined
-            >Close
+            >Bezárás
           </v-btn>
           <v-btn
             color="light-blue white--text"
@@ -98,7 +98,7 @@
             @click="save()"
             rounded
             outlined
-            >Save</v-btn
+            >Mentés</v-btn
           >
         </v-card-actions>
       </v-card>
