@@ -54,15 +54,14 @@
                 </v-btn>
               </v-list-item-action>
             </v-list-item>
-            <v-divider :key="item.id"></v-divider>
           </template>
         </v-list>
         <v-row align="center">
           <v-col cols="3">
             <v-text-field
               v-model="coupon"
-              label="Discount code"
-              placeholder="Enter discount code..."
+              label="Kupon kód"
+              placeholder="Írja be a kupon kódját..."
               :hint="couponHint"
               persistent-hint
               class="tf"
@@ -125,7 +124,7 @@ export default {
         img: "",
         price: 20,
         description: "Tasty pizza",
-        id: 1,
+        id: 0,
         name: "Pizza",
         bacon: true,
         cheese: "",
@@ -135,7 +134,7 @@ export default {
         img: "",
         price: 30,
         description: "Nice hamburger",
-        id: 2,
+        id: 1,
         name: "Hamburger",
         bacon: true,
         cheese: "",
@@ -145,7 +144,7 @@ export default {
         img: "",
         price: 200,
         description: "Nice steak",
-        id: 3,
+        id: 2,
         name: "Steak",
         bacon: true,
         cheese: true,
@@ -155,7 +154,7 @@ export default {
         img: "",
         price: 50,
         description: "Apple",
-        id: 4,
+        id: 3,
         name: "Apple",
         bacon: "",
         cheese: true,
@@ -189,6 +188,10 @@ export default {
         (current, next) => current + next.price,
         0
       );*/
+      if(this.test_datas.length < 1){
+        this.price = 0;
+        return;
+      }
       let total = 0;
       for (let i = 0; i < this.test_datas.length; i++) {
         total += this.test_datas[i].price;
@@ -196,8 +199,13 @@ export default {
       this.price = total;
     },
     remove(index) {
-      this.removeProduct(index);
+      if(this.test_datas.length < 2){
+        this.test_datas.pop();
+        return;
+      }
+      this.test_datas.splice(index,1);
       // itt hívd meg újra a lekérdezést, hogy frissüljön a lista, és emit-eld az App-nak, hogy hány elem lett remove-olva ( count * -1)
+
       this.totalPrice();
     },
     order() {
@@ -221,12 +229,12 @@ export default {
         if(this.goodCoupon){
           this.usedCoupon = true;
           this.price = this.price*0.9;
-          this.couponHint = "Used coupon!-10% from total price.";
+          this.couponHint = "Kupon sikeresen felhasználva! -10% a végösszegből.";
         }else{
-          this.couponHint = "Wrong coupon!";
+          this.couponHint = "Rossz kupon!";
         }
       }else{
-        this.couponHint = "Already used a coupon!";
+        this.couponHint = "Ez már egy felhasznált/lejárt kupon!";
       }
     },
   },
