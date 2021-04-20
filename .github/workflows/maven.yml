@@ -30,3 +30,12 @@ jobs:
       with:
        name: Package
        path: staging
+  
+  
+  extra_tools:
+    runs-on: windows-latest
+    steps:
+    - run: cd frontend
+    - run: npm install    
+    - run: npm run install:eslint
+    - run: npm run lint
