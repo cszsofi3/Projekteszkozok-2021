@@ -107,9 +107,20 @@
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>3.2.0</version>
 				<configuration>
+					<outputDirectory>${project.build.directory}/javadoc</outputDirectory>
+					<reportOutputDirectory>${project.reporting.outputDirectory}/javadoc</reportOutputDirectory>
 					<show>private</show>
 					<nohelp>true</nohelp>
 				</configuration>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<phase>site</phase>
+						<goals>
+							<goal>aggregate</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
