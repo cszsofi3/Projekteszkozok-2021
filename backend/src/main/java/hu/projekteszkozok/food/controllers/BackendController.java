@@ -13,6 +13,9 @@ import hu.projekteszkozok.food.repositories.UserRepository;
 
 import java.util.List;
 
+/**
+ * The type Backend controller.
+ */
 @Controller
 @RequestMapping("/api")
 public class BackendController {
@@ -23,6 +26,11 @@ public class BackendController {
     @Autowired
     private FoodRepository foodRepository;
 
+    /**
+     * Home site.
+     *
+     * @return a displayable message
+     */
     @ResponseBody
     @RequestMapping(path = "/home")
     public String home() {
@@ -30,6 +38,12 @@ public class BackendController {
         return "welcome home";
     }
 
+    /**
+     * Products site.
+     *
+     * @param data the products
+     * @return displayable message
+     */
     @ResponseBody
     @RequestMapping(value = "/products",  method = RequestMethod.GET)
     public String products(@RequestParam(value = "productList",required = false) Object data) {
@@ -38,18 +52,35 @@ public class BackendController {
         else return "no data given";
     }
 
+    /**
+     * Allproducts site where the backend sends the frontend every food from the database.
+     *
+     * @return the list of every food
+     */
     @ResponseBody
     @RequestMapping(path = "/allproducts", method = RequestMethod.GET)
     public List<Food> allproducts() {
         return this.foodRepository.findAll();
     }
 
+    /**
+     * Allusers site where the backend sends the frontend every user from the database.
+     *
+     * @return the list of every user
+     */
     @ResponseBody
     @RequestMapping(value = "/allusers", method = RequestMethod.GET)
     public List<User> allusers() {
         return this.userRepository.findAll();
     }
 
+    /**
+     * Site of a certain user.
+     *
+     * @param id the id of the user
+     * @return the user
+     * @throws RuntimeException if the id does not exist in the database
+     */
     @ResponseBody
     @GetMapping(path = "/user/{id}")
     public User getUserById(@PathVariable("id") int id) throws RuntimeException {

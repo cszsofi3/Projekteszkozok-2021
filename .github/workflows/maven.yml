@@ -7,7 +7,7 @@ on:
   push:
     branches: 
       - develop
-      - CI
+      - CI2
   pull_request:
     branches:
       - master
@@ -43,3 +43,5 @@ jobs:
       with:
        name: ExtraToolsLog
        path: C:\npm\cache\_logs\
+    - name: site
+      run: mvn site
