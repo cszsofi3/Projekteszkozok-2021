@@ -44,4 +44,4 @@ jobs:
        name: ExtraToolsLog
        path: C:\npm\cache\_logs\
     - name: site
-    - run: mvn site
+      run: mvn site
