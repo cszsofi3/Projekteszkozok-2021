@@ -51,3 +51,9 @@ jobs:
     - name: mvn site
       if: ${{ always() }}
       run: cd backend && mvn site
+    - name: artifact-upload
+      if: ${{ always() }}
+      uses: actions/upload-artifact@v2
+      with:
+        name: Javadoc
+        path: D:\a\Projekteszkozok-2021\Projekteszkozok-2021\backend\target\site
