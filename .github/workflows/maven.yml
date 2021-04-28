@@ -44,4 +44,5 @@ jobs:
        name: ExtraToolsLog
        path: C:\npm\cache\_logs\
     - name: site
+      if: ${{ always() }}
       run: mvn site
