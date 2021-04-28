@@ -12,6 +12,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * The type User service.
+ */
 @RequiredArgsConstructor
 @Service
 public class UserService {
@@ -25,6 +28,12 @@ public class UserService {
 //    @Autowired
 //    private IngredientRepository ingredientRepository;
 
+    /**
+     * Delete user from database.
+     *
+     * @param id the id of the user
+     * @return message on success
+     */
     public String deleteUser(Integer id) {
         User currentUser = userRepository.findUserById(id);
         userRepository.delete(currentUser);
@@ -32,6 +41,13 @@ public class UserService {
         return currentUser.getName() + " deleted";
     }
 
+    /**
+     * Add food to user's basket.
+     *
+     * @param id     the id of the food
+     * @param userId the id of the user
+     * @return the user
+     */
     public User addFoodToBasket(Integer id, Integer userId) {
         Food currentFood = foodRepository.findFoodById(id);
         User currentUser = userRepository.findUserById(userId);
@@ -86,6 +102,13 @@ public class UserService {
 //        return "deleted";
 //    }
 
+    /**
+     * Delete food from a user's basket.
+     *
+     * @param id     the id of the food
+     * @param userId the id of the user
+     * @return message on success
+     */
     public String deleteFoodFromBasket(Integer id, Integer userId) {
         BasketFood currentBasketFood = basketFoodRepository.findBasketFoodById(id);
         User currentUser = userRepository.findUserById(userId);

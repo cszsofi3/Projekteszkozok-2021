@@ -8,6 +8,9 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.List;
 
+/**
+ * The type Food.
+ */
 @Entity
 @Data
 @AllArgsConstructor

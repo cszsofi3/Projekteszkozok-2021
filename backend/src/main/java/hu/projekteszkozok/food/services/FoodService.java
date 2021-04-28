@@ -12,6 +12,9 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Food service.
+ */
 @RequiredArgsConstructor
 @Service
 public class FoodService {
@@ -21,6 +24,12 @@ public class FoodService {
     @Autowired
     private IngredientRepository ingredientRepository;
 
+    /**
+     * Add food to the database.
+     *
+     * @param food the food
+     * @return the created food
+     */
     public Food createFood(Food food) {
         List<Ingredient> ingredientList = food.getIngredient();
 
@@ -31,12 +40,24 @@ public class FoodService {
         return food;
     }
 
+    /**
+     * Delete food from database.
+     *
+     * @param id the id of the food
+     * @return message on success
+     */
     public String deleteFood(Integer id) {
         Food currentFood = foodRepository.findFoodById(id);
         foodRepository.delete(currentFood);
         return "deleted";
     }
 
+    /**
+     * List of foods of the same type.
+     *
+     * @param type the type of the food
+     * @return the list of foods
+     */
     public List<Food> listFoodByType(Type type) {
         Iterable<Food> allFood = foodRepository.findAll();
         List<Food> currentFoods = new ArrayList<>();

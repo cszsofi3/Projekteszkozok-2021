@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * The type Ingredient controller.
+ */
 @RestController
 @RequestMapping("/ingredient")
 public class IngredientController {
@@ -15,6 +18,11 @@ public class IngredientController {
     @Autowired
     private IngredientService ingredientService;
 
+    /**
+     * List of all ingredients.
+     *
+     * @return the list
+     */
     @GetMapping("/all")
     public List<String> listAllIngredients() {
         return ingredientService.listAllIngredients();

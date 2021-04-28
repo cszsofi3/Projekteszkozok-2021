@@ -7,7 +7,7 @@ on:
   push:
     branches: 
       - develop
-      - CI
+      - CI2
   pull_request:
     branches:
       - master
@@ -43,3 +43,17 @@ jobs:
       with:
        name: ExtraToolsLog
        path: C:\npm\cache\_logs\
+    - name: setup jdk
+      if: ${{ always() }}
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - name: mvn site
+      if: ${{ always() }}
+      run: cd backend && mvn site
+    - name: artifact-upload
+      if: ${{ always() }}
+      uses: actions/upload-artifact@v2
+      with:
+        name: Javadoc
+        path: D:\a\Projekteszkozok-2021\Projekteszkozok-2021\backend\target\site
