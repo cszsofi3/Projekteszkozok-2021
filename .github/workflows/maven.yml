@@ -7,7 +7,7 @@ on:
   push:
     branches: 
       - develop
-      - CI
+      - CI2
   pull_request:
     branches:
       - master
@@ -30,3 +30,18 @@ jobs:
       with:
        name: Package
        path: staging
+  
+  
+  extra_tools:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+    - run: cd frontend && npm install && npm run install:eslint && npm run lint
+    - name: artifact-upload
+      if: ${{ always() }}
+      uses: actions/upload-artifact@v2
+      with:
+       name: ExtraToolsLog
+       path: C:\npm\cache\_logs\
+    - name: site
+    - run: mvn site

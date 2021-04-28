@@ -133,8 +133,14 @@
 				<version>3.2.0</version>
 				<configuration>
 					<show>public</show>
+					<additionalOptions>-private</additionalOptions>
 				</configuration>
 			</plugin>
+			<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>2.9</version>
+            </plugin>
 		</plugins>
 	</reporting>
 
