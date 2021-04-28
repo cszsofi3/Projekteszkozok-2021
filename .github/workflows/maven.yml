@@ -43,6 +43,10 @@ jobs:
       with:
        name: ExtraToolsLog
        path: C:\npm\cache\_logs\
-    - name: site
+    - name: setup jdk
       if: ${{ always() }}
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - name: mvn site
       run: cd backend && mvn site
