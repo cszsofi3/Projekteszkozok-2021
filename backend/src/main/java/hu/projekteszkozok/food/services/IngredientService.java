@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ * The type Ingredient service.
+ */
 @RequiredArgsConstructor
 @Service
 public class IngredientService {
@@ -17,6 +20,11 @@ public class IngredientService {
     @Autowired
     private IngredientRepository ingredientRepository;
 
+    /**
+     * List of all ingredients.
+     *
+     * @return the list
+     */
     public List<String> listAllIngredients() {
         List<Ingredient> ingredientList = ingredientRepository.findAll();
         List<String> allIngredients = new ArrayList<>();

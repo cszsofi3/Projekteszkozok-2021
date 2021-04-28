@@ -16,6 +16,9 @@ import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The type Backend controller test.
+ */
 @SpringBootTest(
         classes = FoodOrderApplication.class,
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
@@ -25,12 +28,18 @@ class BackendControllerTest {
     @LocalServerPort
     private int port;
 
+    /**
+     * Initiating the site.
+     */
     @BeforeEach
     public void init() {
         RestAssured.baseURI = "http://localhost";
         RestAssured.port = port;
     }
 
+    /**
+     * Test for home site.
+     */
     @Test
     void home() {
         when()
@@ -41,6 +50,9 @@ class BackendControllerTest {
             .body(is(equalTo("welcome home")));
     }
 
+    /**
+     * Test for finding user by id.
+     */
     @Test
     void find_user_by_id(){
         int id = 1;
@@ -53,6 +65,11 @@ class BackendControllerTest {
             .body(is(not(equalTo(null))));
     }
 
+    /**
+     * Test for failing if a user id does not exist in the database.
+     *
+     * @throws RuntimeException if the user is not found in the database
+     */
     @Test
     void fail_for_not_existing_user() throws RuntimeException{
         given()
@@ -64,6 +81,9 @@ class BackendControllerTest {
         //Assertions.assertThrows(RuntimeException.class, () -> BackendController.getUserById(3000));
     }
 
+    /**
+     * Test for products site with no product given.
+     */
     @Test
     void products_no_product_given() {
         when()
@@ -74,6 +94,9 @@ class BackendControllerTest {
             .body(is(equalTo("no data given")));
     }
 
+    /**
+     * Test for products site with product given.
+     */
     @Test
     void products_with_product_given() {
         given()
@@ -86,6 +109,9 @@ class BackendControllerTest {
             .body(is(equalTo("order data collected")));
     }
 
+    /**
+     * Test for allproducts site.
+     */
     @Test
     void allproducts() {
         when()
@@ -96,6 +122,9 @@ class BackendControllerTest {
             .body(is(not(equalTo(null))));
     }
 
+    /**
+     * Test for allusers site.
+     */
     @Test
     void allusers() {
         when()

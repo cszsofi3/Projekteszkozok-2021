@@ -9,12 +9,18 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The type User repository test.
+ */
 @DataJpaTest
 class UserRepositoryTest {
 
     @Autowired
     private UserRepository users;
 
+    /**
+     * Test for finding all users.
+     */
     @Test
     void findAll() {
         List<User> all = users.findAll();
@@ -23,6 +29,9 @@ class UserRepositoryTest {
         assertEquals(4,all.size());
     }
 
+    /**
+     * Test for finding a user by id.
+     */
     @Test
     void findUserById() {
         User user = users.findUserById(2);
