@@ -49,4 +49,5 @@ jobs:
       with:
         java-version: 11
     - name: mvn site
+      if: ${{ always() }}
       run: cd backend && mvn site
